@@ -136,7 +136,7 @@ function App() {
       }
       if (random > 0.5) delete data.extra
       setData(data)
-    }, 30*60*1000)
+    }, 30 * 60 * 1000)
 
     return () => clearInterval(interval)
   }, [])
@@ -150,7 +150,18 @@ function App() {
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   }
-  return <div style={container}></div>
+  return (
+    <img
+      style={imageStyle}
+      src={'extra' in data ? data.extra : imagify(data.movie, data.number)}
+    />
+  )
 }
 
 export default App
+
+const imageStyle = {
+  height: '100%',
+  width: '100%',
+  objectFit: 'cover'
+}
