@@ -113,7 +113,11 @@ const imagify = (movie, n) => {
 }
 
 const activateFullScreen = () => {
-  document.body.requestFullscreen()
+  if (document.fullscreenElement) {
+    document.exitFullscreen()
+  } else {
+    document.body.requestFullscreen()
+  }
 }
 
 function App() {
@@ -155,27 +159,43 @@ function App() {
     backgroundPosition: 'center',
   }
   return (
-    <>
-    <button style={buttonStyle} onClick={activateFullScreen}>CLICK</button>
-    <img
-      style={imageStyle}
-      src={'extra' in data ? data.extra : imagify(data.movie, data.number)}
-      />
-      </>
+    <div style={container}>
+      <button style={buttonStyle} onClick={activateFullScreen}>
+        CLICK
+      </button>
+      <div style={darken} />
+      <div style={message}>
+        Just Chill 🍂
+      </div>
+    </div>
   )
 }
 
 export default App
 
-const imageStyle = {
-  height: '100%',
-  width: '100%',
-  objectFit: 'cover'
+const darken = {
+  backgroundColor: 'black',
+  opacity: 0.5,
+  position: 'fixed',
+  bottom: 0,
+  right: 0,
+  width: '300px',
+  height: '100px',
+  transform: 'translate(150px, 50px)',
+  filter: 'blur(60px)'
 }
 
-const buttonStyle={
+const message = {
+  position: 'fixed',
+  bottom: '20px',
+  right: '20px',
+  fontWeight: '600',
+  color: 'white'
+}
+
+const buttonStyle = {
   position: 'fixed',
   width: '100vw',
   height: '100vh',
-  opacity: 0
+  opacity: 0,
 }
