@@ -4,7 +4,7 @@ import './App.css'
 const BASE_URL = 'https://www.ghibli.jp/gallery'
 
 const MOVIES = {
-  'red-turtle': 50,
+  redturtle: 50,
   onyourmark: 28,
   laputa: 50,
   nausicaa: 50,
@@ -119,6 +119,7 @@ function App() {
         Math.floor(Math.random() * Object.keys(MOVIES).length)
       ],
     number: 1,
+    extra: EXTRA[Math.floor(Math.random() * EXTRA.length)],
   })
 
   useEffect(() => {
