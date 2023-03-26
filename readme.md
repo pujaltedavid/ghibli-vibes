@@ -1,1 +1,1 @@
-(https://ghibli-vibes.web.app)
+https://ghibli-vibes.web.app
