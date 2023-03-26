@@ -112,6 +112,10 @@ const imagify = (movie, n) => {
   return `${BASE_URL}/${movie}${imageNumber}.jpg`
 }
 
+const activateFullScreen = () => {
+  document.body.requestFullscreen()
+}
+
 function App() {
   const [data, setData] = useState({
     movie:
@@ -151,10 +155,13 @@ function App() {
     backgroundPosition: 'center',
   }
   return (
+    <>
+    <button style={buttonStyle} onClick={activateFullScreen}>CLICK</button>
     <img
       style={imageStyle}
       src={'extra' in data ? data.extra : imagify(data.movie, data.number)}
-    />
+      />
+      </>
   )
 }
 
@@ -164,4 +171,11 @@ const imageStyle = {
   height: '100%',
   width: '100%',
   objectFit: 'cover'
+}
+
+const buttonStyle={
+  position: 'fixed',
+  width: '100vw',
+  height: '100vh',
+  opacity: 0
 }
