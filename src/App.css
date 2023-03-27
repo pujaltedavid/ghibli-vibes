@@ -1,0 +1,15 @@
+.vaging {
+    animation: vage-animation 5s linear 0s infinite alternate;
+}
+
+@keyframes vage-animation {
+    0% {
+        transform: translate(475px, 196px)
+    }
+    30% {
+        transform: translate(-185px, 242px)
+    }
+    100% {
+        transform: translate(-684px, -811px)
+    }
+}

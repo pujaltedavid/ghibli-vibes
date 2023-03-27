@@ -159,6 +159,8 @@ function App() {
     backgroundPosition: 'center',
   }
   return (
+    <>
+    <div style={overlay} className='vaging'/>
     <div style={container}>
       <button style={buttonStyle} onClick={activateFullScreen}>
         CLICK
@@ -168,6 +170,7 @@ function App() {
         Just Chill 🍂
       </div>
     </div>
+    </>
   )
 }
 
@@ -198,4 +201,14 @@ const buttonStyle = {
   width: '100vw',
   height: '100vh',
   opacity: 0,
+}
+
+const overlay = {
+  backgroundColor: '#ffd359',
+  opacity: 0.5,
+  filter: 'blur(100px)',
+  width: '500px',
+  height: '400px',
+  position: 'fixed',
+  rotate: '110deg'
 }
