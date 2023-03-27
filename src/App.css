@@ -1,5 +1,5 @@
 .vaging {
-    animation: vage-animation 5s linear 0s infinite alternate;
+    animation: vage-animation 300s linear 0s infinite alternate;
 }
 
 @keyframes vage-animation {
