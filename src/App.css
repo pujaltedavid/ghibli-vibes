@@ -4,12 +4,12 @@
 
 @keyframes vage-animation {
     0% {
-        transform: translate(475px, 196px)
+        transform: translate(-204px, 333px)
     }
     30% {
-        transform: translate(-185px, 242px)
+        transform: translate(-259px, -437px)
     }
     100% {
-        transform: translate(-684px, -811px)
+        transform: translate(947px, -525px)
     }
 }

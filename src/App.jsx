@@ -25,6 +25,19 @@ const MOVIES = {
   chihiro: 50,
 }
 
+const imagify = (movie, n) => {
+  const imageNumber = ('00' + n.toString()).slice(-3)
+  
+  return `${BASE_URL}/${movie}${imageNumber}.jpg`
+}
+
+let GHIBLI_LINKS = []
+Object.keys(MOVIES).map(movie => {
+  for (let i = 1; i <= MOVIES[movie]; ++i) {
+    GHIBLI_LINKS.push(imagify(movie, i))
+  }
+})
+
 const EXTRA = [
   'https://www.ghibli.jp/images/arietty1.jpg',
   'https://www.ghibli.jp/images/ponyo1.jpg',
@@ -106,11 +119,28 @@ const EXTRA = [
   'https://r4.wallpaperflare.com/wallpaper/718/337/252/studio-ghibli-anime-hauru-no-ugoku-shiro-wallpaper-d004e5760f51e45dfadaba95376f8141.jpg',
 ]
 
-const imagify = (movie, n) => {
-  const imageNumber = ('00' + n.toString()).slice(-3)
+let ALL_LINKS = [...GHIBLI_LINKS, ...EXTRA]
 
-  return `${BASE_URL}/${movie}${imageNumber}.jpg`
+function shuffle(array) {
+  let currentIndex = array.length,  randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
+
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
 }
+
+shuffle(ALL_LINKS) 
+
 
 const activateFullScreen = () => {
   if (document.fullscreenElement) {
@@ -121,29 +151,32 @@ const activateFullScreen = () => {
 }
 
 function App() {
-  const [data, setData] = useState({
-    movie:
-      Object.keys(MOVIES)[
-        Math.floor(Math.random() * Object.keys(MOVIES).length)
-      ],
-    number: 1,
-    extra: EXTRA[Math.floor(Math.random() * EXTRA.length)],
-  })
+  // const [data, setData] = useState({
+  //   movie:
+  //     Object.keys(MOVIES)[
+  //       Math.floor(Math.random() * Object.keys(MOVIES).length)
+  //     ],
+  //   number: 1,
+  //   extra: EXTRA[Math.floor(Math.random() * EXTRA.length)],
+  // })
+
+  const [n, setN] = useState(0)
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const random = Math.random()
-      const movie =
-        Object.keys(MOVIES)[
-          Math.floor(Math.random() * Object.keys(MOVIES).length)
-        ]
-      let data = {
-        number: Math.floor(Math.random() * MOVIES[movie]),
-        movie: movie,
-        extra: EXTRA[Math.floor(Math.random() * EXTRA.length)],
-      }
-      if (random > 0.5) delete data.extra
-      setData(data)
+      // const random = Math.random()
+      // const movie =
+      //   Object.keys(MOVIES)[
+      //     Math.floor(Math.random() * Object.keys(MOVIES).length)
+      //   ]
+      // let data = {
+      //   number: Math.floor(Math.random() * MOVIES[movie]),
+      //   movie: movie,
+      //   extra: EXTRA[Math.floor(Math.random() * EXTRA.length)],
+      // }
+      // if (random > 0.5) delete data.extra
+      // setData(data)
+      setN(n => ++n%ALL_LINKS.length)
     }, 30 * 60 * 1000)
 
     return () => clearInterval(interval)
@@ -153,7 +186,7 @@ function App() {
     width: '100vw',
     height: '100vh',
     backgroundImage: `url(${
-      'extra' in data ? data.extra : imagify(data.movie, data.number)
+      ALL_LINKS[n]
     })`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
@@ -207,8 +240,7 @@ const overlay = {
   backgroundColor: '#ffd359',
   opacity: 0.5,
   filter: 'blur(100px)',
-  width: '500px',
-  height: '400px',
+  width: '400px',
+  height: '700px',
   position: 'fixed',
-  rotate: '110deg'
 }
